@@ -55,7 +55,7 @@ public class Entity
 3. Events = Inform external applications. Paste tense. Post-fix with "Event". Pull model.
 
 ## Onion Architecture
-![alt text](img\onion.jpg "Onion Architecture")
+![alt text](img/onion.jpg "Onion Architecture")
 
 ## Commands
 ```
@@ -472,8 +472,8 @@ internal sealed class EditPersonalInfoCommandHandler : ICommandHandler<EditPerso
 ```
 
 ## Seperate Domain Models
-![alt text](img\seperation.jpg "Seperation")
-![alt text](img\scalability.jpg "Scalability")
+![alt text](img/seperation.jpg "Seperation")
+![alt text](img/scalability.jpg "Scalability")
 * Dapper is useful for queries
 * Normalized Data = Good for Commands
 * Denormalized Data = Good for Queries
@@ -485,5 +485,5 @@ internal sealed class EditPersonalInfoCommandHandler : ICommandHandler<EditPerso
 * Eventual Consistency = A consistency model which guarantees that, if no new updates are made to a given data item, eventually all accesses to that item will return the last updated value. 
 
 ## Cqrs vs Specification pattern
-![alt text](img\specification.jpg "Specification")
+![alt text](img/specification.jpg "Specification")
 * In large systems loose coupling is preferred
