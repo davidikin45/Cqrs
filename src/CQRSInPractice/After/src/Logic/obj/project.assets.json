@@ -3569,11 +3569,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Development\\CQRS\\src\\CQRSInPractice\\After\\src\\Logic\\Logic.csproj",
+      "projectUniqueName": "C:\\Development\\Cqrs\\src\\CQRSInPractice\\After\\src\\Logic\\Logic.csproj",
       "projectName": "Logic",
-      "projectPath": "C:\\Development\\CQRS\\src\\CQRSInPractice\\After\\src\\Logic\\Logic.csproj",
+      "projectPath": "C:\\Development\\Cqrs\\src\\CQRSInPractice\\After\\src\\Logic\\Logic.csproj",
       "packagesPath": "C:\\Users\\Dave\\.nuget\\packages\\",
-      "outputPath": "C:\\Development\\CQRS\\src\\CQRSInPractice\\After\\src\\Logic\\obj\\",
+      "outputPath": "C:\\Development\\Cqrs\\src\\CQRSInPractice\\After\\src\\Logic\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -3589,7 +3589,8 @@
       "sources": {
         "C:\\Program Files (x86)\\DevExpress 18.1\\Components\\System\\Components\\Packages": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://dotnetfeed.blob.core.windows.net/dotnet-core/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.1": {

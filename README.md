@@ -57,6 +57,9 @@ public class Entity
 ## Onion Architecture
 ![alt text](img/onion.jpg "Onion Architecture")
 
+## Software Architecture
+![alt text](img/architecture.jpg "Software Architecture")
+
 ## Commands
 ```
 public interface ICommand
