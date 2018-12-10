@@ -61,16 +61,16 @@ public class Entity
 ![alt text](img/architecture.jpg "Software Architecture")
 Microservice architecture aims to make each backends part independent by giving it:
 * Autonomous features
-* Team Ownership
-* Tech agnostic
+* Team Ownership (Team take ownership of frontend, backend and storage rather than becoming and expert at only front or backend part.)
+* Tech agnostic (Instead of investing in a particular tech for entire application can change to different technologies that suit the particular problem.)
 * User experience
-* Value driven
+* Value driven (Customer value driven meaning every change can give the customer value.)
 * Microservices driven
 
 * The apis don't necessarily need to be in seperate projects but Mvc application parts allow the apis to be developed independently and then merged back together for a single deployment.
-* The storage for each module doesn't necessarily need to be a seperate physical database. A seperate DbContext is a good option.
+* The storage for each module doesn't necessarily need to be a seperate physical database. A seperate DbContext (Bounded Context) is a good option.
 * The important part is to maintain and think about each application module as being independent.
-* Microservice frontend architecture aim to have multiple micro frontend parts that are independent, consistent and coherent.
+* Microservice frontend architecture aim to have multiple micro frontend parts that are independent, consistent and coherent. This can be acheieved with Micro Apps, iframes, Web Components, Framework Based Components, Server Side Transclusion and Client Side Transclusion. 
 
 ## Commands
 ```
