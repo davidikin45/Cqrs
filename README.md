@@ -67,13 +67,10 @@ Microservice architecture aims to make each backends part independent by giving 
 * Value driven
 * Microservices driven
 
-* The storage for each module doesn't necessarily need to be a seperate physical database.
+* The apis don't necessarily need to be in seperate projects but Mvc application parts allow the apis to be developed independently and then merged back together for a single deployment.
+* The storage for each module doesn't necessarily need to be a seperate physical database. A seperate DbContext is a good option.
 * The important part is to maintain and think about each application module as being independent.
-
-## Microservice Frontend Architecture
-![alt text](img/frontend.jpg "Frontend")
-* Microservice frontend architecture  aim to have multiple micro frontend parts that are independent, consistent and coherent.
-* Communicate through base app.
+* Microservice frontend architecture aim to have multiple micro frontend parts that are independent, consistent and coherent.
 
 ## Commands
 ```
