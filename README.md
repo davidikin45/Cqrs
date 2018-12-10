@@ -57,8 +57,23 @@ public class Entity
 ## Onion Architecture
 ![alt text](img/onion.jpg "Onion Architecture")
 
-## Software Architecture
+## Microservice Architecture
 ![alt text](img/architecture.jpg "Software Architecture")
+Microservice architecture aims to make each backends part independent by giving it:
+* Autonomous features
+* Team Ownership
+* Tech agnostic
+* User experience
+* Value driven
+* Microservices driven
+
+* The storage for each module doesn't necessarily need to be a seperate physical database.
+* The important part is to maintain and think about each application module as being independent.
+
+## Microservice Frontend Architecture
+![alt text](img/frontend.jpg "Frontend")
+* Microservice frontend architecture  aim to have multiple micro frontend parts that are independent, consistent and coherent.
+* Communicate through base app.
 
 ## Commands
 ```
