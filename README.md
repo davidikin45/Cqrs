@@ -501,4 +501,185 @@ internal sealed class EditPersonalInfoCommandHandler : ICommandHandler<EditPerso
 
 ## Cqrs vs Specification pattern
 ![alt text](img/specification.jpg "Specification")
-* In large systems loose coupling is preferred
+* In large systems loose coupling is preferred (Cqrs)
+* Reduces duplication
+* lambda can either be compiled to a delegate (Func<int, bool>) or expression(Expression<Func<int, bool>>) 
+* IEnumerable uses delegate.  Func<int, bool> func = x => x + 1;
+* IQueryable uses expression. Expression<Func<int, bool>> expression = x => x + 1;
+* Expression > Delegate. Func<int, bool> func = expression.Compile();
+* Not easy to combine expressions like delegates
+* GenericSpecification<T> and returning IQueryable<T> are anti-patterns.
+* Best to return IReadOnlyList from repository. Better than IEnumerable as if connection is closed before enumeration occurs an error will occur.
+* Use strongly typed specifications
+* No need for ISpecification<T>
+* Try and make the specifications encapsulate and not accept any parameters, immuntable.
+* And, Or, Not combinations
+* No need to use specification pattern if not using it for both Search AND Validation.
+
+1. In Memory validation
+2. Retrieve data from DB
+3. Construction-to-order
+
+```
+public class Movie
+{
+
+}
+
+public sealed class GoodMovieSpecification : Specification<Movie>
+{
+	public override Expression<Func<Movie, bool>> ToExpression()
+	{
+		return movie => movie.Rating > 7;
+	}
+}
+
+public sealed class MovieForKidsSpecification : Specification<Movie>
+{
+	public override Expression<Func<Movie, bool>> ToExpression()
+	{
+		return movie => movie.ForKids == true;
+	}
+}
+```
+
+```
+public abstract class Specification<T>
+{
+	//Use in repository
+	//Forces Encapsulation
+	public abstract Expression<Func<T, bool>> ToExpression();
+
+	//Use in Validation
+	public bool IsSatisfiedBy(T entity)
+	{
+		Func<T, bool> predictate = ToExpression().Compile();
+		return predictate(entity);
+	}
+
+	public Specification<T> And(Specification<T> specification)
+	{
+		return new AndSpecification<T>(this, specification);
+	}
+
+	public Specification<T> Or(Specification<T> specification)
+	{
+		return new OrSpecification<T>(this, specification);
+	}
+
+	public Specification<T> Not(Specification<T> specification)
+	{
+		return new NotSpecification<T>(this);
+	}
+}
+
+
+internal sealed class IdentitySpecification<T> : Specification<T>
+{
+	public override Expression<Func<T, bool>> ToExpression()
+	{
+		return x => true;
+	}
+}
+
+internal sealed class AndSpecification<T> : Specification<T>
+{
+	private readonly Specification<T> _left;
+	private readonly Specification<T> _right;
+
+	public AndSpecification(Specification<T> left, Specification<T> right)
+	{
+		_left = left;
+		_right = right;
+	}
+
+	public override Expression<Func<Movie, bool>> ToExpression()
+	{
+		Expression<Func<T, bool>> leftExpression = _left.ToExpression();
+		Expression<Func<T, bool>> rightExpression = _right.ToExpression();
+
+		BinaryExpression andExpression = Expression.AndAlso(leftExpression.Body, rightExpression.Body);
+
+		return Expression.Lambda<Func<T, bool>>(andExpression, leftExpression.Parameters.Single());
+	}
+}
+
+internal sealed class OrSpecification<T> : Specification<T>
+{
+	private readonly Specification<T> _left;
+	private readonly Specification<T> _right;
+
+	public OrSpecification(Specification<T> left, Specification<T> right)
+	{
+		_left = left;
+		_right = right;
+	}
+
+	public override Expression<Func<T, bool>> ToExpression()
+	{
+		Expression<Func<T, bool>> leftExpression = _left.ToExpression();
+		Expression<Func<T, bool>> rightExpression = _right.ToExpression();
+
+		BinaryExpression andExpression = Expression.OrElse(leftExpression.Body, rightExpression.Body);
+
+		return Expression.Lambda<Func<T, bool>>(andExpression, leftExpression.Parameters.Single());
+	}
+}
+
+internal sealed class NotSpecification<T> : Specification<T>
+{
+	private readonly Specification<T> _specification;
+
+	public NotSpecification(Specification<T> specification)
+	{
+		_specification = specification;
+	}
+
+	public override Expression<Func<Movie, bool>> ToExpression()
+	{
+		Expression<Func<T, bool>> expression = _specification.ToExpression();
+
+		BinaryExpression notExpression = Expression.Not(expression.Body);
+
+		return Expression.Lambda<Func<T, bool>>(notExpression, expression.Parameters.Single());
+	}
+}
+```
+```
+public class MovieRepository
+{
+	public List<Movie> GetList(Specification<Movie> specification)
+	{
+		return dbContext.Mvoies.Where(specification.ToExpression()).ToList();
+	}
+}
+```
+```
+var specification = new GoodMovieSpecification<Movie>();
+var specification2 = new MovieForKidsSpecification<Movie>();
+
+var spec = specification.And(specification2);
+
+var movies = _repository.GetList(spec);
+
+var movie = new Movie();
+if(!spec.IsSatisfiedBy(movie))
+{
+
+}
+```
+```
+var spec = Specification<Movie>.All;
+
+if(goodMovies)
+{
+	spec = spec.And(new GoodMovieSpecification());
+}
+
+if(kids)
+{
+	spec = spec.And(new MovieForKidsSpecification());
+}
+
+var movies = _repository.GetList(spec);
+```
