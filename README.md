@@ -65,8 +65,8 @@ Microservice architecture aims to make each backends part independent by giving 
 * Tech agnostic (Instead of investing in a particular tech for entire application can change to different technologies that suit the particular problem.)
 * User experience
 * Value driven (Customer value driven meaning every change can give the customer value.)
-* Microservices driven
 
+* Microservices driven
 * The apis don't necessarily need to be in seperate projects but Mvc application parts allow the apis to be developed independently and then merged back together for a single deployment.
 * The storage for each module doesn't necessarily need to be a seperate physical database. A seperate DbContext (Bounded Context) is a good option.
 * The important part is to maintain and think about each application module as being independent.
@@ -514,7 +514,7 @@ internal sealed class EditPersonalInfoCommandHandler : ICommandHandler<EditPerso
 * No need for ISpecification<T>
 * Try and make the specifications encapsulate and not accept any parameters, immuntable.
 * And, Or, Not combinations
-* No need to use specification pattern if not using it for both Search AND Validation.
+* No need to use specification pattern if not using it for both Search  AND Validation.
 
 1. In Memory validation
 2. Retrieve data from DB
