@@ -54,6 +54,9 @@ public class Entity
 2. Queries = Ask the application about something. Start with word "Get". Post-fix with "Query".
 3. Events = Inform external applications. Paste tense. Post-fix with "Event". Pull model.
 
+## Messages Diagram
+![alt text](img/events.png "Diagram")
+
 ## Onion Architecture
 ![alt text](img/onion.jpg "Onion Architecture")
 
