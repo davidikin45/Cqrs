@@ -57,6 +57,12 @@ public class Entity
 ## Messages Diagram
 ![alt text](img/events.png "Diagram")
 
+## MediatR
+* [MediatR Wiki](https://github.com/jbogard/MediatR/wiki)
+* MediatR is an InMemory Mediator and EventBus.
+* Mediator - Request/Response communication between objects. Ideal for CQRS Commands/Queries.
+* Pub/Sub (Event Bus) - Request only. If there are any subscribers they will get notified.
+
 ## Onion Architecture
 ![alt text](img/onion.jpg "Onion Architecture")
 
