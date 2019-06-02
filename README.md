@@ -60,11 +60,11 @@ public class Entity
 ## MediatR
 * [MediatR Wiki](https://github.com/jbogard/MediatR/wiki)
 * MediatR is an InMemory Mediator and EventBus.
-* Mediator - Request/Response communication between objects. Ideal for CQRS Commands/Queries.
-* Pub/Sub (Event Bus) - Request only. If there are any subscribers they will get notified.
+* Mediator - Request/Response communication between objects. Dispatched to a single handler. Ideal for CQRS Commands/Queries.
+* Pub/Sub (Event Bus) - Request only. If there are any subscribers they will get notified.  Dispatched to multiple handlers. Ideal for Domain Events.
 * [Polymorphic Dispatch](https://github.com/jbogard/MediatR.Extensions.Microsoft.DependencyInjection/issues/24). Allows to register base interface which is returned when asking for concrete implementation.
 * [Container Support](https://github.com/jbogard/MediatR/wiki/Container-Feature-Support)
-
+* .NET Core DI supports Open Generics but not [Covariance and Contravariance](https://simpleinjector.readthedocs.io/en/latest/advanced.html#covariance-and-contravariance)
 
 ## Onion Architecture
 ![alt text](img/onion.jpg "Onion Architecture")
