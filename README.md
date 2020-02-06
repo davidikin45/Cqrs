@@ -23,6 +23,8 @@
 * Don't allow command handlers to raise additional commands. Reuse code by putting it into domain model.
 * Cqrs can provide alot of benefits without event sourcing.
 
+![alt text](diagram.png "Diagram")
+
 ## Advantages
 1. Scalability
 2. Performance
