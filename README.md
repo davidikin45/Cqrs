@@ -22,6 +22,7 @@
 * A decorator is a class or a method that modifies the behavior of an existing class or method without changing it's public interface
 * Don't allow command handlers to raise additional commands. Reuse code by putting it into domain model.
 * Cqrs can provide alot of benefits without event sourcing.
+* [Clean Architecture with .NET Core](https://jasontaylor.dev/clean-architecture-getting-started/)
 
 ![alt text](diagram.png "Diagram")
 
