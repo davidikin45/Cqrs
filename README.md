@@ -529,7 +529,8 @@ internal sealed class EditPersonalInfoCommandHandler : ICommandHandler<EditPerso
 * No need for ISpecification<T>
 * Try and make the specifications encapsulate and not accept any parameters, immuntable.
 * And, Or, Not combinations
-* No need to use specification pattern if not using it for both Search  AND Validation.
+* Generally no need to use specification pattern if not using it for both Search AND Validation. Althought it can still be useful for search when you want to keep Core domain knowledge in specification and allow additional user filters using WhereSpecification.
+
 
 1. In Memory validation
 2. Retrieve data from DB
@@ -572,6 +573,16 @@ public abstract class Specification<T>
 		return predictate(entity);
 	}
 
+	public Specification<T> Where(Expression<Func<T, bool>> expression)
+    {
+        var specification = new WhereSpecification<T>(expression);
+
+        if (this == All)
+            return specification;
+
+        return new AndSpecification<T>(this, specification);
+    }
+
 	public Specification<T> And(Specification<T> specification)
 	{
 		return new AndSpecification<T>(this, specification);
@@ -586,6 +597,21 @@ public abstract class Specification<T>
 	{
 		return new NotSpecification<T>(this);
 	}
+}
+
+internal sealed class WhereSpecification<T> : Specification<T>
+{
+    private readonly Expression<Func<T, bool>> _expression;
+
+    public WhereSpecification(Expression<Func<T, bool>> expression)
+    {
+        _expression = expression;
+    }
+
+    public override Expression<Func<T, bool>> ToExpression()
+    {
+        return _expression;
+    }
 }
 
 
